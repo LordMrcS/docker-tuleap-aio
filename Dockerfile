@@ -35,7 +35,8 @@ RUN yum install -y mysql-server \
 RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     pam_loginuid.so' /etc/pam.d/sshd && \
     sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond && \
     sed -i '/\[main\]/aexclude=php-pecl-apcu' /etc/yum.conf && \
-    /sbin/service sshd start && \
+    systemctl enable sshd.service && \
+    systemctl start sshd.service && \
     rpm --rebuilddb && \
     yum install -y \
     --exclude="tuleap-plugin-referencealias*, tuleap-plugin-im, tuleap-plugin-forumml, tuleap-plugin-fulltextsearch, tuleap-plugin-fusionforge_compat, tuleap-plugin-git, tuleap-plugin-proftpd, tuleap-plugin-tracker-encryption, tuleap-plugin-webdav, tuleap-core-mailman, tuleap-core-cvs" \
