@@ -36,6 +36,7 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond && \
     sed -i '/\[main\]/aexclude=php-pecl-apcu' /etc/yum.conf && \
     mkdir /var/run/sshd && \
+    ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' && \
     /usr/sbin/sshd -D && \
     rpm --rebuilddb && \
     yum install -y \
