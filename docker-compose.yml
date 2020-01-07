@@ -2,7 +2,7 @@ version: "2.1"
 
 services:
   tuleap:
-    image: LordMrcS/docker-tuleap-aio
+    image: lordmrcs/docker-tuleap-aio
     restart: unless-stopped
     environment:
       VIRTUAL_HOST: "${VIRTUAL_HOST:-localhost}"

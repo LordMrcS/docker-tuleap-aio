@@ -36,11 +36,11 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     sed -i '/session    required   pam_loginuid.so/c\#session    required   pam_loginuid.so' /etc/pam.d/crond && \
     sed -i '/\[main\]/aexclude=php-pecl-apcu' /etc/yum.conf && \
     mkdir /var/run/sshd && \
-    ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N '' && \
-    /usr/sbin/sshd -D && \
+    rm -f /etc/ssh/ssh_host_* && \
+    /usr/bin/ssh-keygen -A && \
     rpm --rebuilddb && \
     yum install -y \
-    --exclude="tuleap-plugin-referencealias*, tuleap-plugin-im, tuleap-plugin-forumml, tuleap-plugin-fulltextsearch, tuleap-plugin-fusionforge_compat, tuleap-plugin-git, tuleap-plugin-proftpd, tuleap-plugin-tracker-encryption, tuleap-plugin-webdav, tuleap-core-mailman, tuleap-core-cvs" \
+    --exclude="tuleap-plugin-referencealias*, tuleap-plugin-im, tuleap-plugin-forumml, tuleap-plugin-fulltextsearch, tuleap-plugin-fusionforge_compat, tuleap-plugin-proftpd, tuleap-plugin-tracker-encryption, tuleap-plugin-webdav, tuleap-core-mailman, tuleap-core-cvs" \
     tuleap-install \
     tuleap-plugin-* \
     tuleap-theme-flamingparrot \
@@ -51,9 +51,9 @@ RUN sed -i '/session    required     pam_loginuid.so/c\#session    required     
     yum clean all && \
     sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config && \
     sed -i 's/inet_interfaces = localhost/inet_interfaces = all/' /etc/postfix/main.cf && \
-    rm -f /etc/ssh/ssh_host_* && \
     rm -f /etc/ssl/certs/localhost.crt /etc/pki/tls/private/localhost.key && \
-    rm -f /home/codendiadm/.ssh/id_rsa_gl-adm* /var/lib/gitolite/.ssh/authorized_keys
+    rm -f /home/codendiadm/.ssh/id_rsa_gl-adm* /var/lib/gitolite/.ssh/authorized_keys && \
+    /usr/sbin/sshd 
 
 VOLUME [ "/data" ]
 
