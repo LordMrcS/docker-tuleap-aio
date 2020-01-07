@@ -6,7 +6,7 @@ COPY remi-safe.repo /etc/yum.repos.d/
 COPY RPM-GPG-KEY-remi /etc/pki/rpm-gpg/
 
 # python-pip is from epel, so it has to be installed after epel-release
-RUN yum install -y mysql-server \
+RUN yum install -y mysql \
     epel-release \
     centos-release-scl \
     postfix \
